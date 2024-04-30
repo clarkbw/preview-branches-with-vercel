@@ -7,11 +7,13 @@ on:
 
 env:
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-  DIRECT_URL: ${{ secrets.DIRECT_URL }}
+  # DATABASE_URL: ${{ secrets.DATABASE_URL }} this comes from the gh app
+  DIRECT_URL: ${{ env.DATABASE_URL_UNPOOLED }}
 
 jobs:
   deploy-production:
+    # aligning the environment here allows us to pull the DATABASE_URL
+    environment: Neon Production
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
